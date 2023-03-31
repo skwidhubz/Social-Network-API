@@ -1,36 +1,45 @@
+const { Schema, model } = require('mongoose');
+const thoughtsSchema = require('./Thoughts');
 
-// // CUSTOM VALIDATION
-
-// // email: {
-// //     type: String,
-// //     required: [
-// //       function() { return this.email = includes @ symbol; },
-// //       'username is required if id is specified'
-// //     ]
-
-// // Data that comes into the model make sure it matches the format of a proper email .. @ symbol included.
+const atSymbolValidator = {
+    validator: (value) => {
+      return value.includes('@');
+    },
+    message: (props) => `${props.value} is not valid email-address format`,
+  };
 
 
-// User
-
-// username
-
-// String
-// Unique
-// Required
-// Trimmed
-// email
-
-// String
-// Required
-// Unique
-// Must match a valid email address (look into Mongoose's matching validation)
-// thoughts
-
-// Array of _id values referencing the Thought model
-// friends
-
-// Array of _id values referencing the User model (self-reference)
-// Schema Settings
+const userSchema = new Schema(
+    {
+        username: {
+        type: String,
+        unique: true,
+        requried: true,
+        trim: true
+        },
+  
+        email: {
+        type: String,
+        unique: true,
+        requried: true,
+        trim: true,
+        validator: atSymbolValidator,
+        },
+        thoughts: [thoughtsSchema], // Array of _id values referencing the Thought model
+        friends: [userSchema] // Array of _id values referencing the User model (self-reference)
+    },
+    { 
+        toJSON: {
+            getters: true
+        },
+    }
+);
 
 // Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
+userSchema.virtual('friendCount').get(function () {
+    return this.friends.length
+});
+
+const User = model('user', userSchema);
+module.exports = User;
+
