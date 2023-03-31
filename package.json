@@ -4,6 +4,8 @@
     "mongoose": "^6.10.4"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node index",
+    "dev": "nodemon index",
+    "seed": "node utils/seed"
   }
 }
