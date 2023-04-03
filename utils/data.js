@@ -2,6 +2,7 @@
 
 // seed arrays
 
+// names array
 const names = [
     "Tom",
     "Dave",
@@ -71,6 +72,10 @@ const names = [
     "Bella",
 ];
 
+// emails array
+const emailAddresses = [];
+
+// thoughts array
 const thoughts =  [
     "The road not taken leads to new discoveries.",
     "In the middle of difficulty lies opportunity.",
@@ -83,7 +88,37 @@ const thoughts =  [
     "The best is yet to be.",
     "I have measured out my life with coffee spoons."
 ];
-// build functions to randomise the array data
+
+
+// TODO: build functions to randomise the array data
+
+// random getter for any array
+const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+function getRandomInt () {
+    Math.floor(Math.random() * 5);
+}
+
+const getRandomEmail = () => {
+for (let i = 0; i < 10; i++) {
+  const username = Math.random().toString(36).substring(2, 8); // Generates a random username
+  const domain = Math.random().toString(36).substring(2, 8) + '.com'; // Generates a random domain
+  const emailAddress = `${username}@${domain}`;
+  emailAddresses.push(emailAddress);
+}};
+
+const getRandomThought = () => { // Iterate over thoughts array and choose one. 
+    for (let i = 0; i < thoughts.length; i++) {
+        const randomThought = thoughts[i];
+        return randomThought;
+    }
+};
+
+// random username generator
+const getRandomUserName = () =>
+  `${getRandomArrItem(names)}`+getRandomInt();
 
 // export the functions.
+
+module.exports = { getRandomArrItem, getRandomEmail, getRandomUserName, getRandomThought };
 
