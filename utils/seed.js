@@ -26,6 +26,12 @@ connection.once('open', async () => {
 });
 
 
+
+ // insertMany = takes an array of multiple objects
+ // inserOne = takes one object.
+
+ 
+
 // TODO: SEEDS 
 
 // User

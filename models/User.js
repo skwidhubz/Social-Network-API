@@ -26,7 +26,7 @@ const userSchema = new Schema(
         validator: atSymbolValidator,
         },
         thoughts: [thoughtsSchema], // Array of _id values referencing the Thought model
-        friends: [userSchema] // Array of _id values referencing the User model (self-reference)
+        friends: [userSchema] // Array of _id values referencing the User model (self-
     },
     { 
         toJSON: {
