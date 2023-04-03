@@ -1,6 +1,7 @@
 const { connect } = require('mongoose');
 const connection = require('../config/connection');
-const { Reactions, Thoughts, User } = require('../models');
+const { Thoughts, User } = require('../models');
+const { getRandomArrItem, getRandomEmail, getRandomUserName, getRandomThought } = require('./data');
 
 
 connection.on('error', (err) => err);
@@ -15,12 +16,44 @@ connection.once('open', async () => {
     await Thoughts.deleteMany({});
 
     // Drop existing Reactions
-    await Reactions.deleteMany({});
+    // await Reactions.deleteMany({});
 
+    // empty array for users
+    // username
+    // email
+    // thoughts (thoughtsSchema)
+    // friends (userSchema)
     const users = [];
 
+    for (let i = 0; i < 5; i++) {
+        const username = getRandomUserName();
+        const email = getRandomEmail();
+        const thoughts = getRandomThought();
+        const friends = getRandomUserName();
 
+        users.push({
+            username,
+            email,
+            thoughts,
+            friends,
+        });
+    }
 
+    await User.collection.insertMany(users);
+
+    // empty array for thoughts
+    // text
+    // created at
+    // username
+    // recations (reactionSchema)
+    // const thoughts = [];
+
+    // for (let i = 0; i < 5; i++) {
+    //     const thoughtText = getRandomThought();
+
+    // }
+
+    console.table(users);
     console.info('Seeding complete 😺🌱');
     process.exit(0);
 });
@@ -29,43 +62,5 @@ connection.once('open', async () => {
 
  // insertMany = takes an array of multiple objects
  // inserOne = takes one object.
-
- 
-
-// TODO: SEEDS 
-
-// User
-
-// const users = [
-//     {
-//         username: 'Tom',
-//         email: 'tom@emails.com'
-//     },
-//     {
-//         username: 'Dave',
-//         email: 'dave@emails.com'
-//     },
-//     {
-//         username: 'Kim',
-//         email: 'kim@emails.com'
-//     },
-//     {
-//         username: 'Ligma',
-//         email: 'ligma@emails.com'
-//     },
-// ];
-
-// Thoughts
-
-// const thoughts = [
-//     {
-//         thoughtText: 'this is a thought, from a user',
-//         username: 'Tom'
-//     }
-// ]
-
-// Reactions
-
-
 
 
