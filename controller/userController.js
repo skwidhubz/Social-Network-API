@@ -2,11 +2,17 @@
 const { ObjectId } = require('mongoose').Types;
 const User = require('../models');
 
+// router.route('/').get(getUsers).post(createUser); 
+
 
 // test func
-function testFunc() {
+function testFunc(req, res) {
     console.log('userController exported func');
 }
+
+
+
+
 
 
 module.exports = {

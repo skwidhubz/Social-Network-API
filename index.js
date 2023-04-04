@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('./config/connection');
+const routes = require('./routes');
 // Require model
 // const models = require('./models'); // edit to require used model
 
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(routes);
 
 
 db.once('open', () => {
