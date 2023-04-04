@@ -13,20 +13,20 @@ const userSchema = new Schema(
     {
         username: {
         type: String,
-        unique: true,
+        // unique: true,
         requried: true,
         trim: true
         },
   
         email: {
         type: String,
-        unique: true,
+        // unique: true,
         requried: true,
         trim: true,
         validator: atSymbolValidator,
         },
-        thoughts: [thoughtsSchema], // Array of _id values referencing the Thought model
-        friends: [userSchema] // Array of _id values referencing the User model (self-
+        // thoughts: [thoughtsSchema], // Array of _id values referencing the Thought model
+        // //friends: [userSchema] // Array of _id values referencing the User model (self-
     },
     { 
         toJSON: {

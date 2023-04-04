@@ -3,8 +3,16 @@ const { ObjectId } = require('mongoose').Types;
 const User = require('../models');
 
 
+// test func
+function testFunc() {
+    console.log('userController exported func');
+}
+
 
 module.exports = {
+    
+    testFunc
+
     // get all users
 
 
