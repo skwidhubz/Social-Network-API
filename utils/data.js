@@ -95,18 +95,24 @@ const thoughts =  [
 // random getter for any array
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+// generate random integer
 function getRandomInt () {
-    Math.floor(Math.random() * 5);
+    let randomNumber = Math.floor(Math.random() * 5);
+    
+    return randomNumber;
 }
 
+// generate random email address
 const getRandomEmail = () => {
 for (let i = 0; i < 10; i++) {
   const username = Math.random().toString(36).substring(2, 8); // Generates a random username
   const domain = Math.random().toString(36).substring(2, 8) + '.com'; // Generates a random domain
   const emailAddress = `${username}@${domain}`;
-  emailAddresses.push(emailAddress);
+//   emailAddresses.push(emailAddress);
+  return emailAddress;
 }};
 
+// generate random "thought"
 const getRandomThought = () => { // Iterate over thoughts array and choose one. 
     for (let i = 0; i < thoughts.length; i++) {
         const randomThought = thoughts[i];
