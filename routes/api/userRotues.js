@@ -1,5 +1,17 @@
 // /api/users
 
+const router = require('express').Router();
+
+const { testFunc } = require('../../controller/userController')
+
+
+// Test route
+
+router.get('test', (req, res) => {
+    testFunc();
+})
+
+
 // GET all users
 
 // GET a single user by its _id and populated thought and friend data
