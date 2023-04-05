@@ -18,30 +18,37 @@ connection.once('open', async () => {
     // Drop existing Reactions
     // await Reactions.deleteMany({});
 
-    // empty array for users
-    // username
-    // email
-    // thoughts (thoughtsSchema)
-    // friends (userSchema)
-    const users = [];
+    // Empty array for users
+    const usersArr = []; 
+
+    // Empty array for thoughts
+    const thoughtsArr = []; 
 
     for (let i = 0; i < 5; i++) {
         const username = getRandomUserName();
         const email = getRandomEmail();
-        const thoughts = getRandomThought();
+        const thought = getRandomThought();
         const friends = getRandomUserName();
 
-        users.push({
+        usersArr.push({
             username,
             email,
-            thoughts,
+            thought,
             friends,
         });
-    }
 
-    await Users.collection.insertMany(users);
+        thoughtsArr.push({
+            thought
+        });
+    };
+    
 
-    console.table(users);
+    await Users.collection.insertMany(usersArr);
+
+    await Thoughts.collection.insertMany(thoughtsArr);
+
+    console.table(usersArr);
+    console.table(thoughtsArr)
     console.info('Seeding complete 😺🌱');
     process.exit(0);
 });
