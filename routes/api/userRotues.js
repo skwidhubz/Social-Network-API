@@ -7,10 +7,11 @@ const { testFunc } = require('../../controller/userController')
 
 // Test route
 
-router.get('test', (req, res) => {
+router.get('/test', (req, res) => {
     testFunc();
 })
 
+module.exports = router;
 
 // GET all users
 
