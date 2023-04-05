@@ -5,3 +5,5 @@ router.get("/test", (req, res) => {
 	console.log('hello test');
 });
 
+module.exports = router;
+

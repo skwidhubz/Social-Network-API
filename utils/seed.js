@@ -1,6 +1,6 @@
 const { connect } = require('mongoose');
 const connection = require('../config/connection');
-const { Thoughts, User } = require('../models');
+const { Thoughts, Users } = require('../models');
 const { getRandomArrItem, getRandomEmail, getRandomUserName, getRandomThought } = require('./data');
 
 
@@ -10,7 +10,7 @@ connection.once('open', async () => {
     console.log('connected');
 
     // Drop existing Users
-    await User.deleteMany({});
+    await Users.deleteMany({});
 
     // Drop exisiting Thoughts
     await Thoughts.deleteMany({});
@@ -39,7 +39,7 @@ connection.once('open', async () => {
         });
     }
 
-    await User.collection.insertMany(users);
+    await Users.collection.insertMany(users);
 
     // empty array for thoughts
     // text
