@@ -1,35 +1,75 @@
-const { Schema, model, default: mongoose, Types } = require('mongoose');
+// Require Mongoos and Moment
+const { Schema, model, Types } = require('mongoose');
+const moment = require('moment');
 
-
-const reactionSchema = new Schema(
+// ReactionsSchema
+const ReactionsSchema = new Schema(
     {
-        reactionId: {
-            type: mongoose.Types.ObjectId,
-            default: () => new Types.ObjectId(),
-        },
-        reactionBody: {
-            type: String,
-            required: true,
-            maxLength: 280
-        },
-        username: {
-            type: String,
-            required: true,
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now
-            // TODO: Use a getter method to format the timestamp on query
-        }
+    // Set custom ID 
+    reactionId: {
+        type: Schema.Types.ObjectId,
+        default: ()=> new Types.ObjectId()
     },
-    {   // Schema Settings
-        toJSON: {
-            getters: true
-        },
+    reactionBody: {
+        type: String,
+        required: true,
+        maxlength: 280
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+    }
+    },
+    {
+    toJSON: {
+        getters: true
+    } 
     }
 );
 
-// This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
+// ThoughtsSchema
+const ThoughtsSchema = new Schema(
+    {
+    thoughtText: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        // Moment
+        get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    // Use ReactionsSchema to validate data
+    reactions: [ReactionsSchema]
+    },
+    {
+    toJSON: {
+        virtuals: true,
+        getters: true
+    },
+    id: false
+    }
+)
 
-const Reactions = model('reactions', reactionSchema);
-module.exports = Reactions;
+// get total count of reactions
+ThoughtsSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+});
+
+// create the Thoughts model using the Thoughts Schema
+const Thoughts = model('Thoughts', ThoughtsSchema);
+
+// Export Thoughts Module
+module.exports = Thoughts;

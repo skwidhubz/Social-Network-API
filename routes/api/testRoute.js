@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-// test route.
-router.get('test', (req, res) => {
+// Get all posts ---> example from doc.
+router.get("/test", (req, res) => {
 	console.log('hello test');
 });
 
