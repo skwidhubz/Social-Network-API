@@ -1,5 +1,5 @@
 // Require Users Model
-const {Users} = require('../models');
+const { Users, Thoughts } = require('../models');
 
 // Set up Users Controller
 const usersController = {
@@ -12,39 +12,63 @@ const usersController = {
     },
 
     // Get All Users
-    getAllUsers(req, res) {
-        Users.find({})
-        // populate users thoughts
-        .populate({path: 'thoughts', select: '-__v'})
-        // populate user friends
-        .populate({path: 'friends', select: '-__v'})
-        .select('-__v')
-        // .sort({_id: -1})
-        .then(dbUsersData => res.json(dbUsersData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    async getAllUsers(req, res) {
+        // Users.find({})
+        // // populate users thoughts
+        // .populate({path: 'thoughts', select: '-__v'})
+        // // populate user friends
+        // .populate({path: 'friends', select: '-__v'})
+        // .select('-__v')
+        // // .sort({_id: -1})
+        // .then(dbUsersData => res.json(dbUsersData))
+        // .catch(err => {
+        //     console.log(err);
+        //     res.status(500).json(err);
+        // });
+        try {
+            const dbUserData = await Users.find() 
+            .select('-__v')
+            res.json(dbUserData)
+        } catch (error ) {
+            console.log(error)
+            res.status(500).json(error)
+        }
     },
 
     // Get single user by ID
-    getUsersById({params}, res) {
-        Users.findOne({_id: params.id })
-        .populate({path: 'thoughts', select: '-__v'})
-        .populate({path: 'friends', select: '-__v'})
-        .select('-__v')
-        // return if no user is found 
-        .then(dbUsersData => {
-            if(!dbUsersData) {
-                res.status(404).json({message: 'No User with this particular ID!'});
-                return; 
+   async getUsersById(req, res) {
+        // Users.findOne({_id: params.id })
+        // .populate({path: 'thoughts', select: '-__v'})
+        // .populate({path: 'friends', select: '-__v'})
+        // .select('-__v')
+        // // return if no user is found 
+        // .then(dbUsersData => {
+        //     if(!dbUsersData) {
+        //         res.status(404).json({message: 'No User with this particular ID!'});
+        //         return; 
+        //     }
+        //     res.json(dbUsersData)
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        //     res.status(400).json(err)
+        // })
+        try {
+            const dbUserData = await Users.findOne({ _id: req.params.userId })
+                .select('-__v')
+                // .populate('friends')
+                // .populate('thoughts')
+            console.log(dbUserData);
+
+            if (!dbUserData) {
+                return res.status(404).json({message: 'no user found'})
             }
-            res.json(dbUsersData)
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(400).json(err)
-        })
+
+            res.json(dbUserData)
+        } catch (error ) {
+            console.log(error)
+            res.status(500).json(error)
+        }
     },
 
     // Update a current User by ID

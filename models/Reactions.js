@@ -32,7 +32,4 @@ const ReactionsSchema = new Schema(
     }
 );
 
-// Export Reactions Module
-const Reactions = model('reactions', ReactionsSchema);
-
-module.exports = Reactions;
+module.exports = ReactionsSchema;

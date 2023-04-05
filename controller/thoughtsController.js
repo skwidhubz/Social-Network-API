@@ -21,16 +21,26 @@ const thoughtsController = {
     },
 
     // Get all available Thoughts
-    getAllThoughts(req,res) {
-        Thoughts.find({})
-        .populate({path: 'reactions', select: '-__v'})
-        .select('-__v')
-        // .sort({_id: -1})
-        .then(dbThoughtsData => res.json(dbThoughtsData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    async getAllThoughts(req,res) {
+
+        try {
+            const dbUserData = await Thoughts.find() 
+            .select('-__v')
+            res.json(dbUserData)
+        } catch (error ) {
+            console.log(error)
+            res.status(500).json(error)
+        }
+
+        // Thoughts.find({})
+        // .populate({path: 'reactions', select: '-__v'})
+        // .select('-__v')
+        // // .sort({_id: -1})
+        // .then(dbThoughtsData => res.json(dbThoughtsData))
+        // .catch(err => {
+        //     console.log(err);
+        //     res.status(500).json(err);
+        // });
     },
 
     // Get a certain thought by ID
