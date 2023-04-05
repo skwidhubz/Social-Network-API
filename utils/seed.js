@@ -41,24 +41,10 @@ connection.once('open', async () => {
 
     await Users.collection.insertMany(users);
 
-    // empty array for thoughts
-    // text
-    // created at
-    // username
-    // recations (reactionSchema)
-    // const thoughts = [];
-
-    // for (let i = 0; i < 5; i++) {
-    //     const thoughtText = getRandomThought();
-
-    // }
-
     console.table(users);
     console.info('Seeding complete 😺🌱');
     process.exit(0);
 });
-
-
 
  // insertMany = takes an array of multiple objects
  // inserOne = takes one object.
