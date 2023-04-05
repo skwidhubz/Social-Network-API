@@ -14,13 +14,13 @@ const {
 } = require('../../controller/thoughtsController');
 
 // -- Directs to: /api/thoughts <GET>
-router.route('/').get(getAllThoughts);
+router.route('/').get(getAllThoughts).post(createThoughts);;
 
 // -- Directs to: /api/thoughts/:id <GET, PUT, DELETE>
 router.route('/:id').get(getThoughtsById).put(updateThoughts).delete(deleteThoughts); 
 
 // -- Directs to: /api/thoughts/:userId <POST>
-router.route('/:userId').post(createThoughts);
+// router.route('/:userId')
 
 // -- Directs to: /api/thoughts/:thoughtId/reactions <POST>
 router.route('/:thoughtId/reactions').post(addReaction);
