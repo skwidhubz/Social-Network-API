@@ -16,6 +16,7 @@ Below is a link to the demo video of the application, and a screenshot.
 [Video Demonstration Link ](https://clipchamp.com/watch/HBol1jIqS55)
 
 
+![Screenshot 2023-04-06 174832](https://user-images.githubusercontent.com/81959922/230311461-7c560d33-a752-4499-98af-caa13f2127ee.png)
 
 
 ## User Story
@@ -58,7 +59,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
   
 ## Usage 
   
-`npm start`
+`npm run start`
 
 
 ## Contributing
