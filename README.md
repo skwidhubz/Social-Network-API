@@ -11,9 +11,12 @@
 
 A backend API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list.
   
-Below is a video of the application:
-  
-![social-network-api](./assets/users.gif)
+Below is a link to the demo video of the application, and a screenshot. 
+
+[Video Demonstration Link ](https://clipchamp.com/watch/HBol1jIqS55)
+
+
+
 
 ## User Story
 

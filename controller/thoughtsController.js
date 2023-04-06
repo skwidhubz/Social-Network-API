@@ -32,15 +32,6 @@ const thoughtsController = {
             res.status(500).json(error)
         }
 
-        // Thoughts.find({})
-        // .populate({path: 'reactions', select: '-__v'})
-        // .select('-__v')
-        // // .sort({_id: -1})
-        // .then(dbThoughtsData => res.json(dbThoughtsData))
-        // .catch(err => {
-        //     console.log(err);
-        //     res.status(500).json(err);
-        // });
     },
 
     // Get a certain thought by ID
