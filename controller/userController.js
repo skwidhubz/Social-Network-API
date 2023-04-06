@@ -58,7 +58,7 @@ const usersController = {
                 .select('-__v')
                 // .populate('friends')
                 // .populate('thoughts')
-            console.log(dbUserData);
+            // console.log(dbUserData);
 
             if (!dbUserData) {
                 return res.status(404).json({message: 'no user found'})
@@ -92,7 +92,8 @@ const usersController = {
                 res.status(404).json({message: 'No User with this particular ID!'});
                 return;
             }
-            res.json(dbUsersData);
+            res.json({message: 'User has been successfully deleted'});
+            return;
         })
         .catch(err => res.status(400).json(err));
     },
@@ -114,7 +115,7 @@ const usersController = {
 
     // Delete a current Friend
     deleteFriend({ params }, res) {
-        Users.findOneAndUpdate({_id: params.id}, {$pull: { friends: params.friendId}}, {new: true})
+        Users.findOneAndUpdate({_id: params.userId}, {$pull: { friends: params.friendId}}, {new: true})
         .populate({path: 'friends', select: '-__v'})
         .select('-__v')
         .then(dbUsersData => {
