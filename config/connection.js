@@ -6,6 +6,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/socialApiDB', {
   useUnifiedTopology: true,
 });
 
-// Export connection 
+// Export mongoose connection 
 module.exports = mongoose.connection;
 
