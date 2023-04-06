@@ -11,7 +11,6 @@ const testRoutes = require('./testRoute');
 // Route for testing console logs / requests
 router.use('/test', testRoutes);
 
-
 // Add `/users` to created routes 
 router.use('/users', usersRoutes);
 
